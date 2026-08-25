@@ -144,7 +144,14 @@ export default function MapaPage() {
         </div>
 
         {loteSeleccionado && !modoDibujo && (
-          <LoteSimulador lote={loteSeleccionado} onClose={() => setLoteSeleccionado(null)} />
+          <LoteSimulador
+            lote={loteSeleccionado}
+            onClose={() => setLoteSeleccionado(null)}
+            onActualizado={(loteActualizado) => {
+              setLoteSeleccionado(loteActualizado)
+              setLotes((prev) => prev.map((l) => (l.id === loteActualizado.id ? loteActualizado : l)))
+            }}
+          />
         )}
       </div>
 

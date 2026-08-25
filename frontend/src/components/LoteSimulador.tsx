@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { api } from '../api/client'
-import type { Lote, SimulacionCuotas } from '../api/types'
+import type { EstadoLote, Lote, SimulacionCuotas } from '../api/types'
 
 const formatoMoneda = new Intl.NumberFormat('es-PE', { style: 'currency', currency: 'PEN' })
 
@@ -16,11 +16,19 @@ const estadoColor: Record<Lote['estado'], string> = {
   vendido: 'bg-rose-100 text-rose-700',
 }
 
-export default function LoteSimulador({ lote, onClose }: { lote: Lote; onClose: () => void }) {
+interface Props {
+  lote: Lote
+  onClose: () => void
+  onActualizado: (lote: Lote) => void
+}
+
+export default function LoteSimulador({ lote, onClose, onActualizado }: Props) {
   const [plazo, setPlazo] = useState(lote.plazos_meses_disponibles[0])
   const [simulacion, setSimulacion] = useState<SimulacionCuotas | null>(null)
   const [cargando, setCargando] = useState(false)
   const [mostrarTabla, setMostrarTabla] = useState(false)
+  const [cambiandoEstado, setCambiandoEstado] = useState(false)
+  const [confirmarEstado, setConfirmarEstado] = useState<EstadoLote | null>(null)
 
   useEffect(() => {
     setCargando(true)
@@ -30,6 +38,21 @@ export default function LoteSimulador({ lote, onClose }: { lote: Lote; onClose: 
       .then((res) => setSimulacion(res.data))
       .finally(() => setCargando(false))
   }, [lote.id, plazo])
+
+  useEffect(() => {
+    setConfirmarEstado(null)
+  }, [lote.id])
+
+  async function cambiarEstado(nuevoEstado: EstadoLote) {
+    setCambiandoEstado(true)
+    try {
+      const res = await api.put<Lote>(`/lotes/${lote.id}`, { estado: nuevoEstado })
+      onActualizado(res.data)
+    } finally {
+      setCambiandoEstado(false)
+      setConfirmarEstado(null)
+    }
+  }
 
   return (
     <aside className="w-full sm:w-96 bg-white border-l border-slate-200 h-full overflow-y-auto p-5 space-y-4">
@@ -48,6 +71,44 @@ export default function LoteSimulador({ lote, onClose }: { lote: Lote; onClose: 
       <div className="text-sm text-slate-600 space-y-1">
         {lote.area_m2 && <p>Área: {lote.area_m2} m²</p>}
         <p className="text-xl font-semibold text-slate-800">{formatoMoneda.format(lote.precio)}</p>
+      </div>
+
+      <div className="border border-slate-200 rounded-lg p-3 space-y-2">
+        <p className="text-xs font-medium text-slate-500">Cambiar estado del lote</p>
+
+        {confirmarEstado ? (
+          <div className="flex items-center justify-between gap-2 text-sm">
+            <span>
+              ¿Marcar como <strong>{estadoEtiqueta[confirmarEstado]}</strong>?
+            </span>
+            <div className="flex gap-2 shrink-0">
+              <button
+                onClick={() => cambiarEstado(confirmarEstado)}
+                disabled={cambiandoEstado}
+                className="text-indigo-600 font-medium disabled:opacity-50"
+              >
+                {cambiandoEstado ? '...' : 'Sí'}
+              </button>
+              <button onClick={() => setConfirmarEstado(null)} className="text-slate-500">
+                No
+              </button>
+            </div>
+          </div>
+        ) : (
+          <div className="flex gap-2 flex-wrap">
+            {(['disponible', 'reservado', 'vendido'] as const)
+              .filter((e) => e !== lote.estado)
+              .map((e) => (
+                <button
+                  key={e}
+                  onClick={() => setConfirmarEstado(e)}
+                  className={`text-xs px-3 py-1.5 rounded-full font-medium ${estadoColor[e]} hover:opacity-80`}
+                >
+                  Marcar {estadoEtiqueta[e].toLowerCase()}
+                </button>
+              ))}
+          </div>
+        )}
       </div>
 
       <div>

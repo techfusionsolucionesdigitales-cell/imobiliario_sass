@@ -72,7 +72,8 @@ class DemoDataSeeder extends Seeder
             [
                 'codigo' => 'A-01',
                 'area_m2' => 180,
-                'precio' => 45000,
+                'precio_contado' => 45000,
+                'precio_credito' => 49500,
                 'estado' => 'disponible',
                 'poligono' => [
                     [-12.0460, -77.0448],
@@ -84,7 +85,8 @@ class DemoDataSeeder extends Seeder
             [
                 'codigo' => 'A-02',
                 'area_m2' => 200,
-                'precio' => 52000,
+                'precio_contado' => 52000,
+                'precio_credito' => 57200,
                 'estado' => 'reservado',
                 'poligono' => [
                     [-12.0460, -77.0441],
@@ -96,7 +98,8 @@ class DemoDataSeeder extends Seeder
             [
                 'codigo' => 'A-03',
                 'area_m2' => 220,
-                'precio' => 58000,
+                'precio_contado' => 58000,
+                'precio_credito' => 63800,
                 'estado' => 'vendido',
                 'poligono' => [
                     [-12.0460, -77.0434],
@@ -113,7 +116,8 @@ class DemoDataSeeder extends Seeder
                 [
                     'area_m2' => $data['area_m2'],
                     'poligono' => $data['poligono'],
-                    'precio' => $data['precio'],
+                    'precio_contado' => $data['precio_contado'],
+                    'precio_credito' => $data['precio_credito'],
                     'estado' => $data['estado'],
                     'cuota_inicial_pct' => 20,
                     'plazos_meses_disponibles' => [12, 24, 36, 48, 60],

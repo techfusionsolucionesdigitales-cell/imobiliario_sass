@@ -48,7 +48,8 @@ export interface Lote {
   codigo: string
   area_m2: number | null
   poligono: [number, number][]
-  precio: number
+  precio_contado: number
+  precio_credito: number
   estado: EstadoLote
   cuota_inicial_pct: number
   plazos_meses_disponibles: number[]
@@ -65,7 +66,9 @@ export interface CuotaAmortizacion {
 
 export interface SimulacionCuotas {
   lote_id: number
-  precio: number
+  precio_contado: number
+  precio_credito: number
+  ahorro_al_contado: number
   cuota_inicial_pct: number
   cuota_inicial_monto: number
   monto_financiar: number

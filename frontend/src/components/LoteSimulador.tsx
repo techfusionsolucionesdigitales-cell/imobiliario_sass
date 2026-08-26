@@ -70,7 +70,14 @@ export default function LoteSimulador({ lote, onClose, onActualizado }: Props) {
 
       <div className="text-sm text-slate-600 space-y-1">
         {lote.area_m2 && <p>Área: {lote.area_m2} m²</p>}
-        <p className="text-xl font-semibold text-slate-800">{formatoMoneda.format(lote.precio)}</p>
+        <div className="flex items-baseline justify-between">
+          <span>Al contado</span>
+          <span className="text-xl font-semibold text-slate-800">{formatoMoneda.format(lote.precio_contado)}</span>
+        </div>
+        <div className="flex items-baseline justify-between text-slate-500">
+          <span>A crédito</span>
+          <span className="font-medium">{formatoMoneda.format(lote.precio_credito)}</span>
+        </div>
       </div>
 
       <div className="border border-slate-200 rounded-lg p-3 space-y-2">
@@ -131,12 +138,14 @@ export default function LoteSimulador({ lote, onClose, onActualizado }: Props) {
       {simulacion && !cargando && (
         <div className="space-y-3">
           <div className="bg-slate-50 rounded-lg p-4 space-y-2 text-sm">
+            <Fila label="Precio a crédito" valor={simulacion.precio_credito} />
             <Fila label={`Cuota inicial (${simulacion.cuota_inicial_pct}%)`} valor={simulacion.cuota_inicial_monto} />
             <Fila label="Monto a financiar" valor={simulacion.monto_financiar} />
             <Fila label="Tasa de interés anual" valorTexto={`${simulacion.tasa_interes_anual}%`} />
             <div className="border-t border-slate-200 my-2" />
             <Fila label={`Cuota mensual x${simulacion.numero_cuotas}`} valor={simulacion.cuota_mensual} destacado />
             <Fila label="Total a pagar" valor={simulacion.total_a_pagar} />
+            <Fila label="Diferencia vs. pagar al contado" valor={simulacion.ahorro_al_contado} />
           </div>
 
           <button

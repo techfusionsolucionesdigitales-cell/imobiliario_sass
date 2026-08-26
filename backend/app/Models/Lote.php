@@ -14,7 +14,8 @@ class Lote extends Model
         'codigo',
         'area_m2',
         'poligono',
-        'precio',
+        'precio_contado',
+        'precio_credito',
         'estado',
         'cuota_inicial_pct',
         'plazos_meses_disponibles',
@@ -26,7 +27,8 @@ class Lote extends Model
         return [
             'poligono' => 'array',
             'plazos_meses_disponibles' => 'array',
-            'precio' => 'decimal:2',
+            'precio_contado' => 'decimal:2',
+            'precio_credito' => 'decimal:2',
             'cuota_inicial_pct' => 'decimal:2',
             'tasa_interes_anual' => 'decimal:2',
         ];
@@ -43,7 +45,8 @@ class Lote extends Model
      */
     public function simularCuotas(int $numeroCuotas): array
     {
-        $precio = (float) $this->precio;
+        // El financiamiento a cuotas se calcula sobre el precio a crédito, no el de contado.
+        $precio = (float) $this->precio_credito;
         $cuotaInicial = round($precio * ((float) $this->cuota_inicial_pct / 100), 2);
         $montoFinanciar = round($precio - $cuotaInicial, 2);
         $tasaAnual = (float) $this->tasa_interes_anual;
@@ -65,7 +68,9 @@ class Lote extends Model
 
         return [
             'lote_id' => $this->id,
-            'precio' => $precio,
+            'precio_contado' => (float) $this->precio_contado,
+            'precio_credito' => $precio,
+            'ahorro_al_contado' => round($precio - (float) $this->precio_contado, 2),
             'cuota_inicial_pct' => (float) $this->cuota_inicial_pct,
             'cuota_inicial_monto' => $cuotaInicial,
             'monto_financiar' => $montoFinanciar,

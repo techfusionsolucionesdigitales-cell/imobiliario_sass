@@ -5,7 +5,8 @@ interface Props {
   onGuardar: (data: {
     codigo: string
     area_m2: number | null
-    precio: number
+    precio_contado: number
+    precio_credito: number
     cuota_inicial_pct: number
     tasa_interes_anual: number
     plazos_meses_disponibles: number[]
@@ -16,7 +17,8 @@ interface Props {
 export default function LoteFormModal({ puntos, onGuardar, onCancelar }: Props) {
   const [codigo, setCodigo] = useState('')
   const [area, setArea] = useState('')
-  const [precio, setPrecio] = useState('')
+  const [precioContado, setPrecioContado] = useState('')
+  const [precioCredito, setPrecioCredito] = useState('')
   const [cuotaInicial, setCuotaInicial] = useState('20')
   const [tasa, setTasa] = useState('12')
   const [plazos, setPlazos] = useState('12,24,36,48,60')
@@ -41,7 +43,8 @@ export default function LoteFormModal({ puntos, onGuardar, onCancelar }: Props) 
       await onGuardar({
         codigo,
         area_m2: area ? Number(area) : null,
-        precio: Number(precio),
+        precio_contado: Number(precioContado),
+        precio_credito: Number(precioCredito),
         cuota_inicial_pct: Number(cuotaInicial),
         tasa_interes_anual: Number(tasa),
         plazos_meses_disponibles: plazosArr,
@@ -75,14 +78,30 @@ export default function LoteFormModal({ puntos, onGuardar, onCancelar }: Props) 
           />
         </div>
 
-        <input
-          placeholder="Precio"
-          type="number"
-          required
-          value={precio}
-          onChange={(e) => setPrecio(e.target.value)}
-          className="w-full border border-slate-300 rounded-lg px-3 py-2"
-        />
+        <div className="grid grid-cols-2 gap-3">
+          <div>
+            <label className="block text-xs text-slate-500 mb-1">Precio al contado</label>
+            <input
+              placeholder="Precio al contado"
+              type="number"
+              required
+              value={precioContado}
+              onChange={(e) => setPrecioContado(e.target.value)}
+              className="w-full border border-slate-300 rounded-lg px-3 py-2"
+            />
+          </div>
+          <div>
+            <label className="block text-xs text-slate-500 mb-1">Precio a crédito</label>
+            <input
+              placeholder="Precio a crédito"
+              type="number"
+              required
+              value={precioCredito}
+              onChange={(e) => setPrecioCredito(e.target.value)}
+              className="w-full border border-slate-300 rounded-lg px-3 py-2"
+            />
+          </div>
+        </div>
 
         <div className="grid grid-cols-2 gap-3">
           <div>

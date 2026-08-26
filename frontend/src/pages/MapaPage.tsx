@@ -51,7 +51,8 @@ export default function MapaPage() {
   async function guardarLote(data: {
     codigo: string
     area_m2: number | null
-    precio: number
+    precio_contado: number
+    precio_credito: number
     cuota_inicial_pct: number
     tasa_interes_anual: number
     plazos_meses_disponibles: number[]

@@ -38,7 +38,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
     api
       .get<Usuario>('/auth/me')
-      .then((res) => setUsuario(res.data))
+      .then((res) => {
+        setUsuario(res.data)
+        setRoles(res.data.roles ?? [])
+      })
       .catch(() => localStorage.removeItem(TOKEN_STORAGE_KEY))
       .finally(() => setLoading(false))
   }, [])

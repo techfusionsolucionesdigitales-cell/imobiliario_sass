@@ -60,7 +60,12 @@ class AuthController extends Controller
 
     public function me(Request $request)
     {
-        return response()->json($request->user()->load('inmobiliaria'));
+        $user = $request->user()->load('inmobiliaria');
+
+        return response()->json([
+            ...$user->toArray(),
+            'roles' => $user->getRoleNames(),
+        ]);
     }
 
     public function logout()

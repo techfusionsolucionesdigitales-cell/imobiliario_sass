@@ -14,6 +14,7 @@ export interface Usuario {
   username: string
   email: string | null
   inmobiliaria?: Inmobiliaria
+  roles?: string[]
 }
 
 export interface Proyecto {

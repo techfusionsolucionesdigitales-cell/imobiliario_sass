@@ -4,6 +4,7 @@ import RegistroPage from './pages/RegistroPage'
 import ProyectosPage from './pages/ProyectosPage'
 import ProyectoDetailPage from './pages/ProyectoDetailPage'
 import MapaPage from './pages/MapaPage'
+import InmobiliariaSettingsPage from './pages/InmobiliariaSettingsPage'
 import ProtectedRoute from './components/ProtectedRoute'
 
 function App() {
@@ -33,6 +34,14 @@ function App() {
         element={
           <ProtectedRoute>
             <MapaPage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/inmobiliaria"
+        element={
+          <ProtectedRoute>
+            <InmobiliariaSettingsPage />
           </ProtectedRoute>
         }
       />

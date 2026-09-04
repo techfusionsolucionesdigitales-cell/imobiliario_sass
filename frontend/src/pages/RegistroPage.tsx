@@ -33,9 +33,17 @@ export default function RegistroPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-slate-50">
-      <form onSubmit={onSubmit} className="w-full max-w-sm bg-white p-8 rounded-xl shadow space-y-4">
-        <h1 className="text-2xl font-semibold text-slate-800">Registrar inmobiliaria</h1>
+    <div className="min-h-screen flex items-center justify-center bg-slate-200 p-4">
+      <div className="w-full max-w-sm rounded-xl shadow-2xl overflow-hidden border border-slate-300">
+        <div className="bg-slate-900 px-5 py-3 flex items-center gap-2">
+          <span className="w-2.5 h-2.5 rounded-full bg-rose-500" />
+          <span className="w-2.5 h-2.5 rounded-full bg-amber-400" />
+          <span className="w-2.5 h-2.5 rounded-full bg-emerald-500" />
+          <span className="ml-2 text-sm font-medium text-slate-300">Sistema Inmobiliario Digital</span>
+        </div>
+
+        <form onSubmit={onSubmit} className="bg-white p-8 space-y-4">
+        <h1 className="text-xl font-semibold text-slate-800 text-center pb-2">Registrar inmobiliaria</h1>
 
         <div>
           <label className="block text-sm font-medium text-slate-700 mb-1">Nombre de la inmobiliaria</label>
@@ -99,7 +107,8 @@ export default function RegistroPage() {
             Inicia sesión
           </Link>
         </p>
-      </form>
+        </form>
+      </div>
     </div>
   )
 }

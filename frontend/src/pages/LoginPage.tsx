@@ -16,7 +16,7 @@ export default function LoginPage() {
     setCargando(true)
     try {
       await login(username, password)
-      navigate('/proyectos')
+      navigate('/')
     } catch {
       setError('Usuario o contraseña incorrectos')
     } finally {

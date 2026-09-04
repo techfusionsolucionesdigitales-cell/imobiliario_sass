@@ -24,7 +24,7 @@ export default function RegistroPage() {
     setCargando(true)
     try {
       await registrarInmobiliaria(form)
-      navigate('/proyectos')
+      navigate('/')
     } catch {
       setError('No se pudo completar el registro. Revisa los datos.')
     } finally {

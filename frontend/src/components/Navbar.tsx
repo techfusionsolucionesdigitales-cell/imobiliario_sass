@@ -8,6 +8,7 @@ const rolEtiqueta: Record<string, string> = {
 }
 
 const enlaces = [
+  { to: '/', label: 'Inicio', icon: '🏠', fin: true },
   { to: '/proyectos', label: 'Proyectos', icon: '📐' },
   { to: '/inmobiliaria', label: 'Mi inmobiliaria', icon: '🏢' },
 ]
@@ -38,6 +39,7 @@ export default function Navbar() {
             <NavLink
               key={enlace.to}
               to={enlace.to}
+              end={enlace.fin}
               className={({ isActive }) =>
                 `flex items-center gap-1.5 px-3 h-12 text-sm font-medium border-b-2 transition-colors ${
                   isActive

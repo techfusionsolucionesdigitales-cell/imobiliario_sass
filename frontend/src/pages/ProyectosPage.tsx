@@ -21,12 +21,12 @@ export default function ProyectosPage() {
   return (
     <div className="min-h-screen bg-slate-50">
       <Navbar />
-      <main className="max-w-5xl mx-auto p-6">
-        <div className="flex items-center justify-between mb-6">
-          <h1 className="text-xl font-semibold text-slate-800">Proyectos / Urbanizaciones</h1>
+      <main className="max-w-[1600px] mx-auto p-10">
+        <div className="flex items-center justify-between mb-8">
+          <h1 className="text-3xl font-semibold text-slate-800">Proyectos / Urbanizaciones</h1>
           <button
             onClick={() => setMostrarForm((v) => !v)}
-            className="bg-indigo-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-indigo-700"
+            className="bg-indigo-600 text-white px-5 py-2.5 rounded-lg text-base font-medium hover:bg-indigo-700"
           >
             {mostrarForm ? 'Cancelar' : '+ Nuevo proyecto'}
           </button>
@@ -46,16 +46,16 @@ export default function ProyectosPage() {
         ) : proyectos.length === 0 ? (
           <p className="text-slate-500">Aún no hay proyectos. Crea el primero.</p>
         ) : (
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {proyectos.map((p) => (
               <Link
                 key={p.id}
                 to={`/proyectos/${p.id}`}
-                className="bg-white rounded-xl shadow p-5 hover:shadow-md transition"
+                className="bg-white rounded-2xl shadow-md p-7 hover:shadow-xl hover:-translate-y-1 transition-all"
               >
-                <h2 className="font-semibold text-slate-800">{p.nombre}</h2>
+                <h2 className="text-lg font-semibold text-slate-800">{p.nombre}</h2>
                 <p className="text-sm text-slate-500 mt-1">{p.ubicacion ?? 'Sin ubicación'}</p>
-                <p className="text-xs text-slate-400 mt-3">{p.planos_count ?? 0} plano(s)</p>
+                <p className="text-sm text-slate-400 mt-4">{p.planos_count ?? 0} plano(s)</p>
               </Link>
             ))}
           </div>
@@ -91,44 +91,44 @@ function NuevoProyectoForm({ onCreado }: { onCreado: () => void }) {
   }
 
   return (
-    <form onSubmit={onSubmit} className="bg-white rounded-xl shadow p-5 mb-6 space-y-3">
-      <div className="grid sm:grid-cols-2 gap-3">
+    <form onSubmit={onSubmit} className="bg-white rounded-2xl shadow-md p-7 mb-8 space-y-4">
+      <div className="grid sm:grid-cols-2 gap-4">
         <input
           placeholder="Nombre del proyecto"
           required
           value={form.nombre}
           onChange={(e) => setForm({ ...form, nombre: e.target.value })}
-          className="border border-slate-300 rounded-lg px-3 py-2"
+          className="border border-slate-300 rounded-lg px-4 py-2.5 text-base"
         />
         <input
           placeholder="Ubicación"
           value={form.ubicacion}
           onChange={(e) => setForm({ ...form, ubicacion: e.target.value })}
-          className="border border-slate-300 rounded-lg px-3 py-2"
+          className="border border-slate-300 rounded-lg px-4 py-2.5 text-base"
         />
         <input
           placeholder="Latitud centro (ej. -12.0470)"
           required
           value={form.lat_centro}
           onChange={(e) => setForm({ ...form, lat_centro: e.target.value })}
-          className="border border-slate-300 rounded-lg px-3 py-2"
+          className="border border-slate-300 rounded-lg px-4 py-2.5 text-base"
         />
         <input
           placeholder="Longitud centro (ej. -77.0430)"
           required
           value={form.lng_centro}
           onChange={(e) => setForm({ ...form, lng_centro: e.target.value })}
-          className="border border-slate-300 rounded-lg px-3 py-2"
+          className="border border-slate-300 rounded-lg px-4 py-2.5 text-base"
         />
       </div>
       <textarea
         placeholder="Descripción"
         value={form.descripcion}
         onChange={(e) => setForm({ ...form, descripcion: e.target.value })}
-        className="w-full border border-slate-300 rounded-lg px-3 py-2"
+        className="w-full border border-slate-300 rounded-lg px-4 py-2.5 text-base"
       />
       {error && <p className="text-sm text-red-600">{error}</p>}
-      <button type="submit" className="bg-indigo-600 text-white px-4 py-2 rounded-lg text-sm font-medium">
+      <button type="submit" className="bg-indigo-600 text-white px-5 py-2.5 rounded-lg text-base font-medium">
         Guardar proyecto
       </button>
     </form>

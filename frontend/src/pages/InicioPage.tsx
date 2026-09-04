@@ -45,33 +45,33 @@ export default function InicioPage() {
   return (
     <div className="min-h-screen bg-slate-50">
       <Navbar />
-      <main className="max-w-5xl mx-auto p-6">
-        <h1 className="text-xl font-semibold text-slate-800">Hola, {usuario?.name?.split(' ')[0]}</h1>
-        <p className="text-sm text-slate-500 mb-6">{usuario?.inmobiliaria?.nombre}</p>
+      <main className="max-w-[1600px] mx-auto p-10">
+        <h1 className="text-3xl font-semibold text-slate-800">Hola, {usuario?.name?.split(' ')[0]}</h1>
+        <p className="text-lg text-slate-500 mb-10">{usuario?.inmobiliaria?.nombre}</p>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
-          <div className="bg-white rounded-xl shadow p-5">
-            <p className="text-xs text-slate-500">Proyectos</p>
-            <p className="text-2xl font-semibold text-slate-800">{totalProyectos ?? '—'}</p>
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+          <div className="bg-white rounded-2xl shadow-md p-8">
+            <p className="text-sm text-slate-500">Proyectos</p>
+            <p className="text-4xl font-semibold text-slate-800">{totalProyectos ?? '—'}</p>
           </div>
-          <div className="bg-white rounded-xl shadow p-5">
-            <p className="text-xs text-slate-500">Planos digitalizados</p>
-            <p className="text-2xl font-semibold text-slate-800">{totalPlanos ?? '—'}</p>
+          <div className="bg-white rounded-2xl shadow-md p-8">
+            <p className="text-sm text-slate-500">Planos digitalizados</p>
+            <p className="text-4xl font-semibold text-slate-800">{totalPlanos ?? '—'}</p>
           </div>
         </div>
 
-        <h2 className="text-sm font-semibold text-slate-500 uppercase tracking-wide mb-3">Módulos</h2>
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <h2 className="text-base font-semibold text-slate-500 uppercase tracking-wide mb-4">Módulos</h2>
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {modulos.map((m) => (
             <Link
               key={m.to}
               to={m.to}
-              className="bg-white rounded-xl shadow p-5 hover:shadow-md hover:-translate-y-0.5 transition-all flex flex-col gap-2"
+              className="bg-white rounded-2xl shadow-md p-8 hover:shadow-xl hover:-translate-y-1 transition-all flex flex-col items-center text-center gap-3 aspect-square justify-center"
             >
-              <span className="text-3xl">{m.icon}</span>
-              <h3 className="font-semibold text-slate-800">{m.titulo}</h3>
+              <span className="text-6xl">{m.icon}</span>
+              <h3 className="text-lg font-semibold text-slate-800">{m.titulo}</h3>
               <p className="text-sm text-slate-500">{m.descripcion}</p>
-              {m.contador && <p className="text-xs text-indigo-600 font-medium mt-1">{m.contador}</p>}
+              {m.contador && <p className="text-sm text-indigo-600 font-medium mt-1">{m.contador}</p>}
             </Link>
           ))}
         </div>

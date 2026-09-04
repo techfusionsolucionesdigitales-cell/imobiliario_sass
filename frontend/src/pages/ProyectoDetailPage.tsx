@@ -23,15 +23,15 @@ export default function ProyectoDetailPage() {
   return (
     <div className="min-h-screen bg-slate-50">
       <Navbar />
-      <main className="max-w-5xl mx-auto p-6">
-        <Link to="/proyectos" className="text-sm text-indigo-600">
+      <main className="max-w-[1600px] mx-auto p-10">
+        <Link to="/proyectos" className="text-base text-indigo-600">
           ← Proyectos
         </Link>
-        <div className="flex items-center justify-between mt-2 mb-6">
-          <h1 className="text-xl font-semibold text-slate-800">{proyecto?.nombre ?? 'Cargando...'}</h1>
+        <div className="flex items-center justify-between mt-3 mb-8">
+          <h1 className="text-3xl font-semibold text-slate-800">{proyecto?.nombre ?? 'Cargando...'}</h1>
           <button
             onClick={() => setMostrarForm((v) => !v)}
-            className="bg-indigo-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-indigo-700"
+            className="bg-indigo-600 text-white px-5 py-2.5 rounded-lg text-base font-medium hover:bg-indigo-700"
           >
             {mostrarForm ? 'Cancelar' : '+ Subir plano'}
           </button>
@@ -50,15 +50,15 @@ export default function ProyectoDetailPage() {
         {planos.length === 0 ? (
           <p className="text-slate-500">Aún no hay planos digitalizados para este proyecto.</p>
         ) : (
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {planos.map((p) => (
               <Link
                 key={p.id}
                 to={`/planos/${p.id}`}
-                className="bg-white rounded-xl shadow p-5 hover:shadow-md transition"
+                className="bg-white rounded-2xl shadow-md p-7 hover:shadow-xl hover:-translate-y-1 transition-all"
               >
-                <h2 className="font-semibold text-slate-800">{p.nombre}</h2>
-                <p className="text-xs text-slate-400 mt-3">{p.lotes_count ?? 0} lote(s)</p>
+                <h2 className="text-lg font-semibold text-slate-800">{p.nombre}</h2>
+                <p className="text-sm text-slate-400 mt-4">{p.lotes_count ?? 0} lote(s)</p>
               </Link>
             ))}
           </div>
@@ -106,55 +106,55 @@ function NuevoPlanoForm({ proyecto, onCreado }: { proyecto: Proyecto; onCreado: 
   }
 
   return (
-    <form onSubmit={onSubmit} className="bg-white rounded-xl shadow p-5 mb-6 space-y-3">
+    <form onSubmit={onSubmit} className="bg-white rounded-2xl shadow-md p-7 mb-8 space-y-4">
       <input
         placeholder="Nombre del plano (ej. Plano General, Etapa 1...)"
         required
         value={nombre}
         onChange={(e) => setNombre(e.target.value)}
-        className="w-full border border-slate-300 rounded-lg px-3 py-2"
+        className="w-full border border-slate-300 rounded-lg px-4 py-2.5 text-base"
       />
       <input
         type="file"
         accept="image/*"
         required
         onChange={(e) => setImagen(e.target.files?.[0] ?? null)}
-        className="w-full text-sm"
+        className="w-full text-base"
       />
-      <p className="text-xs text-slate-500">
+      <p className="text-sm text-slate-500">
         Límites geográficos donde se superpone la imagen sobre el mapa (ajustables luego visualmente):
       </p>
-      <div className="grid grid-cols-2 gap-3">
+      <div className="grid grid-cols-2 gap-4">
         <input
           placeholder="Norte"
           value={bounds.bounds_norte}
           onChange={(e) => setBounds({ ...bounds, bounds_norte: e.target.value })}
-          className="border border-slate-300 rounded-lg px-3 py-2"
+          className="border border-slate-300 rounded-lg px-4 py-2.5 text-base"
         />
         <input
           placeholder="Sur"
           value={bounds.bounds_sur}
           onChange={(e) => setBounds({ ...bounds, bounds_sur: e.target.value })}
-          className="border border-slate-300 rounded-lg px-3 py-2"
+          className="border border-slate-300 rounded-lg px-4 py-2.5 text-base"
         />
         <input
           placeholder="Este"
           value={bounds.bounds_este}
           onChange={(e) => setBounds({ ...bounds, bounds_este: e.target.value })}
-          className="border border-slate-300 rounded-lg px-3 py-2"
+          className="border border-slate-300 rounded-lg px-4 py-2.5 text-base"
         />
         <input
           placeholder="Oeste"
           value={bounds.bounds_oeste}
           onChange={(e) => setBounds({ ...bounds, bounds_oeste: e.target.value })}
-          className="border border-slate-300 rounded-lg px-3 py-2"
+          className="border border-slate-300 rounded-lg px-4 py-2.5 text-base"
         />
       </div>
       {error && <p className="text-sm text-red-600">{error}</p>}
       <button
         type="submit"
         disabled={subiendo}
-        className="bg-indigo-600 text-white px-4 py-2 rounded-lg text-sm font-medium disabled:opacity-50"
+        className="bg-indigo-600 text-white px-5 py-2.5 rounded-lg text-base font-medium disabled:opacity-50"
       >
         {subiendo ? 'Subiendo...' : 'Guardar plano'}
       </button>

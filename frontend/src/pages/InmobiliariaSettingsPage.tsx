@@ -41,42 +41,42 @@ export default function InmobiliariaSettingsPage() {
   return (
     <div className="min-h-screen bg-slate-50">
       <Navbar />
-      <main className="max-w-2xl mx-auto p-6">
-        <h1 className="text-xl font-semibold text-slate-800 mb-1">Mi inmobiliaria</h1>
-        <p className="text-sm text-slate-500 mb-6">
+      <main className="max-w-3xl mx-auto p-10">
+        <h1 className="text-3xl font-semibold text-slate-800 mb-1">Mi inmobiliaria</h1>
+        <p className="text-base text-slate-500 mb-8">
           Slug interno: <code className="bg-slate-100 px-1.5 py-0.5 rounded">{usuario?.inmobiliaria?.slug}</code>
         </p>
 
         {cargando ? (
           <p className="text-slate-500">Cargando...</p>
         ) : (
-          <form onSubmit={onSubmit} className="bg-white rounded-xl shadow p-6 space-y-4">
+          <form onSubmit={onSubmit} className="bg-white rounded-2xl shadow-md p-8 space-y-5">
             <div>
-              <label className="block text-sm font-medium text-slate-700 mb-1">Nombre comercial</label>
+              <label className="block text-base font-medium text-slate-700 mb-1.5">Nombre comercial</label>
               <input
                 value={form.nombre}
                 onChange={(e) => setForm({ ...form, nombre: e.target.value })}
                 required
-                className="w-full border border-slate-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                className="w-full border border-slate-300 rounded-lg px-4 py-2.5 text-base focus:outline-none focus:ring-2 focus:ring-indigo-500"
               />
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-slate-700 mb-1">Correo de contacto</label>
+              <label className="block text-base font-medium text-slate-700 mb-1.5">Correo de contacto</label>
               <input
                 type="email"
                 value={form.email}
                 onChange={(e) => setForm({ ...form, email: e.target.value })}
-                className="w-full border border-slate-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                className="w-full border border-slate-300 rounded-lg px-4 py-2.5 text-base focus:outline-none focus:ring-2 focus:ring-indigo-500"
               />
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-slate-700 mb-1">Teléfono</label>
+              <label className="block text-base font-medium text-slate-700 mb-1.5">Teléfono</label>
               <input
                 value={form.telefono}
                 onChange={(e) => setForm({ ...form, telefono: e.target.value })}
-                className="w-full border border-slate-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                className="w-full border border-slate-300 rounded-lg px-4 py-2.5 text-base focus:outline-none focus:ring-2 focus:ring-indigo-500"
               />
             </div>
 
@@ -86,7 +86,7 @@ export default function InmobiliariaSettingsPage() {
             <button
               type="submit"
               disabled={guardando}
-              className="bg-indigo-600 text-white px-4 py-2 rounded-lg text-sm font-medium disabled:opacity-50"
+              className="bg-indigo-600 text-white px-5 py-2.5 rounded-lg text-base font-medium disabled:opacity-50"
             >
               {guardando ? 'Guardando...' : 'Guardar cambios'}
             </button>

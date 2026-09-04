@@ -6,11 +6,11 @@ interface AuthContextValue {
   usuario: Usuario | null
   roles: string[]
   loading: boolean
-  login: (email: string, password: string) => Promise<void>
+  login: (username: string, password: string) => Promise<void>
   registrarInmobiliaria: (data: {
     inmobiliaria_nombre: string
     admin_name: string
-    admin_email: string
+    admin_username: string
     admin_password: string
   }) => Promise<void>
   logout: () => Promise<void>
@@ -49,15 +49,15 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setRoles(data.roles)
   }
 
-  async function login(email: string, password: string) {
-    const res = await api.post<AuthResponse>('/auth/login', { email, password })
+  async function login(username: string, password: string) {
+    const res = await api.post<AuthResponse>('/auth/login', { username, password })
     aplicarSesion(res.data)
   }
 
   async function registrarInmobiliaria(data: {
     inmobiliaria_nombre: string
     admin_name: string
-    admin_email: string
+    admin_username: string
     admin_password: string
   }) {
     const res = await api.post<AuthResponse>('/auth/registro', data)

@@ -23,7 +23,7 @@ class DemoDataSeeder extends Seeder
         );
 
         $admin = User::firstOrCreate(
-            ['email' => 'admin@demo.test'],
+            ['username' => 'admin'],
             [
                 'inmobiliaria_id' => $inmobiliaria->id,
                 'name' => 'Admin Demo',
@@ -35,7 +35,7 @@ class DemoDataSeeder extends Seeder
         }
 
         $vendedor = User::firstOrCreate(
-            ['email' => 'vendedor@demo.test'],
+            ['username' => 'vendedor'],
             [
                 'inmobiliaria_id' => $inmobiliaria->id,
                 'name' => 'Vendedor Demo',

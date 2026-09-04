@@ -5,7 +5,7 @@ import { useAuth } from '../context/AuthContext'
 export default function LoginPage() {
   const { login } = useAuth()
   const navigate = useNavigate()
-  const [email, setEmail] = useState('admin@demo.test')
+  const [username, setUsername] = useState('admin')
   const [password, setPassword] = useState('password')
   const [error, setError] = useState<string | null>(null)
   const [cargando, setCargando] = useState(false)
@@ -15,7 +15,7 @@ export default function LoginPage() {
     setError(null)
     setCargando(true)
     try {
-      await login(email, password)
+      await login(username, password)
       navigate('/proyectos')
     } catch {
       setError('Credenciales inválidas')
@@ -31,12 +31,13 @@ export default function LoginPage() {
         <p className="text-sm text-slate-500">Sistema Inmobiliario Digital</p>
 
         <div>
-          <label className="block text-sm font-medium text-slate-700 mb-1">Correo</label>
+          <label className="block text-sm font-medium text-slate-700 mb-1">Usuario</label>
           <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            type="text"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
             required
+            autoCapitalize="none"
             className="w-full border border-slate-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
           />
         </div>

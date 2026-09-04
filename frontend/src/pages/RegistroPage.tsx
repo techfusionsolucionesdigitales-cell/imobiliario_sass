@@ -8,7 +8,7 @@ export default function RegistroPage() {
   const [form, setForm] = useState({
     inmobiliaria_nombre: '',
     admin_name: '',
-    admin_email: '',
+    admin_username: '',
     admin_password: '',
   })
   const [error, setError] = useState<string | null>(null)
@@ -58,12 +58,15 @@ export default function RegistroPage() {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-slate-700 mb-1">Correo</label>
+          <label className="block text-sm font-medium text-slate-700 mb-1">Usuario</label>
           <input
-            type="email"
-            value={form.admin_email}
-            onChange={(e) => set('admin_email', e.target.value)}
+            type="text"
+            value={form.admin_username}
+            onChange={(e) => set('admin_username', e.target.value)}
             required
+            autoCapitalize="none"
+            pattern="[A-Za-z0-9_-]+"
+            title="Solo letras, números, guiones y guion bajo"
             className="w-full border border-slate-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
           />
         </div>

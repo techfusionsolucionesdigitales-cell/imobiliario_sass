@@ -8,7 +8,6 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use PHPOpenSourceSaver\JWTAuth\Facades\JWTAuth;
 
@@ -22,7 +21,7 @@ class AuthController extends Controller
         $data = $request->validate([
             'inmobiliaria_nombre' => ['required', 'string', 'max:255'],
             'admin_name' => ['required', 'string', 'max:255'],
-            'admin_email' => ['required', 'email', 'unique:users,email'],
+            'admin_username' => ['required', 'string', 'max:50', 'alpha_dash', 'unique:users,username'],
             'admin_password' => ['required', 'string', 'min:8'],
         ]);
 
@@ -34,7 +33,7 @@ class AuthController extends Controller
         $user = User::create([
             'inmobiliaria_id' => $inmobiliaria->id,
             'name' => $data['admin_name'],
-            'email' => $data['admin_email'],
+            'username' => $data['admin_username'],
             'password' => Hash::make($data['admin_password']),
         ]);
 
@@ -48,7 +47,7 @@ class AuthController extends Controller
     public function login(Request $request)
     {
         $credentials = $request->validate([
-            'email' => ['required', 'email'],
+            'username' => ['required', 'string'],
             'password' => ['required', 'string'],
         ]);
 

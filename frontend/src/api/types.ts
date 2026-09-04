@@ -11,7 +11,8 @@ export interface Usuario {
   id: number
   inmobiliaria_id: number
   name: string
-  email: string
+  username: string
+  email: string | null
   inmobiliaria?: Inmobiliaria
 }
 
